@@ -4,9 +4,27 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { BrowserRouter as Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+
+import { createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
+import { fetchBooks} from './actions/book.action';
+import { Provider } from 'react-redux';
+
+export const history = createBrowserHistory({forceRefresh:true});
+const store = createStore(rootReducer , applyMiddleware(thunk));
+store.dispatch(fetchBooks());
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider  store={store}>
+        <Router>
+          <App/>
+        </Router>
+    </Provider>  
   </React.StrictMode>,
   document.getElementById('root')
 );
