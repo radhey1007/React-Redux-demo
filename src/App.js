@@ -42,7 +42,7 @@ export class App extends Component {
             />
             <Route path="/edit/:id"
                    exact
-                   component= {() => <Createbook />}
+                   component= {(props) => <Createbook {...props}/>}
             />
            </Switch>
         </div>

@@ -15,8 +15,6 @@ import { Provider } from 'react-redux';
 
 export const history = createBrowserHistory({forceRefresh:true});
 const store = createStore(rootReducer , applyMiddleware(thunk));
-store.dispatch(fetchBooks());
-
 
 ReactDOM.render(
   <React.StrictMode>

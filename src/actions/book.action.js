@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import {
         ADD_BOOK_ERROR,
         ADD_BOOK_SUCCESS,
@@ -18,20 +19,49 @@ import { books } from '../Data/data';
 //CREATE---------------------------------------------------------------------
 
 export const createBook = (book) => {
-    console.log(book , '==========');
-    const data = {
-        title:book.title,
-        author:book.author,
-        year:book.year
-    }
-    debugger;
-    return (dispatch) => {
-        //call post api
-    }
+    let data = {};
+    if(book.id !==0) {
+        // edit part
+        data = {
+            id:book.id,
+            title:book.title,
+            author:book.author,
+            year:book.year
+        }
+        return (dispatch) => {
+            //call edit post api
+            dispatch(editBook(data))
+        }
+    } else {
+        // add part
+        const data = {
+            title:book.title,
+            author:book.author,
+            year:book.year
+        }
+        return (dispatch) => {
+            //call post api
+        }
+    }    
 }
 
 //EDIT-----------------------------------------------------------------------
+export const editBook = (book) => {
+    return (dispatch) => {
+        // return Axios.post api call
+    }
+}
+
+
 //DELETE---------------------------------------------------------------------
+
+export const deleteBook = (id) => {
+    alert('delete id: ' + id);
+    return (dispatch) => {
+        // return Axios.delete api call
+    }
+}
+
 //FETCH----------------------------------------------------------------------
 
 export const fetchBooksSuccess = (data) => {
@@ -59,7 +89,7 @@ export const fetchBooks = () => {
             dispatch(fetchBooksSuccess(books));
             isShowLoading = false;    
             dispatch(fetchBooksLoading(isShowLoading));
-        }, 2000);        
+        }, 1000);        
         
     }   
 }
